@@ -38,10 +38,10 @@ Device requests use `Authorization: Bearer <API_DEVICE_TOKEN>` and JSON fields `
 3. Create a Twilio Verify service with SMS, short code expiry, and fraud controls. Add `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, and `TWILIO_VERIFY_SERVICE_SID` as private host secrets. Production refuses to start without all three.
 4. Set first-admin `BOOTSTRAP_ADMIN_EMAIL` and a unique `BOOTSTRAP_ADMIN_PASSWORD` (16+ characters); run `npm run migrate` then `npm run create-admin`. Remove the bootstrap password afterward.
 5. Use `npm start`, `NODE_ENV=production`, and host HTTPS. Set `TRUST_PROXY=1` only behind one trusted TLS proxy. Check `https://<api-host>/healthz`.
-6. Only after deployment, integrate the API URL with the website and matching ESP32 firmware. The public page remains in browser-demo mode until then. Its read-only status relay is a separate service.
+6. The public dashboard is integrated with the Render API URL; real accounts work only after its database, Twilio, and bootstrap admin settings are configured and /healthz is healthy. Matching ESP32 firmware and the read-only status relay remain separate hardware setup items.
 
 Local setup: `npm install`, configure `.env`, then run `npm run migrate` and `npm start`. Without Twilio in development, OTP routes return 503; no code is printed in logs.
 
 ## Still required
 
-A Node.js host/API domain, PostgreSQL database, Twilio Verify credentials, private Seller Admin account, device ID/token, and ESP32 protocol integration. Do not upload real `.env`, provider credentials, phone lists, passwords, or device tokens to GitHub.
+PostgreSQL URL, Twilio Verify credentials, and a private bootstrap admin password still need to be configured. The Render API service and dashboard connection are already set up. ESP32 device-token/firmware integration is separate. Do not upload real `.env`, provider credentials, phone lists, passwords, or device tokens to GitHub.
