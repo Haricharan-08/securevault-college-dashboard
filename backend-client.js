@@ -52,7 +52,7 @@
       headers,
       body: body === undefined ? undefined : JSON.stringify(body),
       credentials: 'omit',
-      cache: 'no-store'
+      cache: 'no-store', signal: AbortSignal.timeout(65000)
     });
     if (response.status === 204) return {};
     const data = await response.json().catch(() => ({}));
