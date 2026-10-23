@@ -1,6 +1,6 @@
 # SecureVault account and OTP API
 
-This folder contains a Node.js API scaffold for the SecureVault GitHub Pages dashboard. GitHub Pages hosts static files only; run this API separately on an HTTPS Node.js host with PostgreSQL. It is source only and is not deployed or connected to the live dashboard.
+This folder contains the Node.js/PostgreSQL API source for SecureVault. GitHub Pages serves the dashboard, which is connected to `https://securevault-account-api.onrender.com`; Render hosts the API separately. The service has been created, but deployment currently fails because `DATABASE_URL` is missing, so real sign-in and SMS verification remain unavailable until `/healthz` returns `ok`.
 
 It provides persistent User and Seller Admin accounts, admin-only User provisioning/deactivation, server-enforced roles, phone verification, and SMS vault OTPs through Twilio Verify. Codes go to the registered phone and are never returned to the website. The ESP32 requests a code after its local RFID check, verifies the keypad code with the API, and remains the only component that decides whether the vault unlocks. This API has no unlock endpoint.
 
